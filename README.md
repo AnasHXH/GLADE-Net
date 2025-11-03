@@ -167,18 +167,12 @@ You can open and run it directly on GitHub or in Google Colab.
 - Visualizing haze removal and perceptual enhancement results  
 
 ---
----
+
 ## 🧠 Citation
 
 If you use this repository, please cite the paper:
+Common soon
 
-Ali, A. M., Boulila, W., Benjdira, B., Ammar, A. et al.  
-“CLEAR-Net: A Cascaded Local and External Attention Network for Enhanced Dehazing of Remote Sensing Images.”  
-IEEE JSTARS, 2025.
 
 ---
 
-## 📜 License
-
-MIT License  
-Copyright (c) 2025 Anas M. Ali
