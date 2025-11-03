@@ -35,36 +35,12 @@ It integrates adversarial learning and frequency-domain guidance for fine detail
 
 ---
 
-## 📂 Repository Structure
-
-GLADE-Net-Phase1/
-│
-├── src/
-│   ├── gladenet_phase1/
-│   │   └── models/
-│   │       └── uformer_module.py     # UFormer architecture
-│   └── train.py                      # PyTorch-Lightning training entry
-│
-├── tools/
-│   ├── grid_crop_pairs.py            # Pre-tile large training images
-│   ├── grid_crop.py                  # Simple grid crop utility
-│   └── inference_grid.py             # Phase-1 inference (new version)
-│
-├── dataset/
-│   ├── train/
-│   └── test/
-│
-├── requirements.txt
-└── README.md
-
----
-
 ## ⚙️ Installation
-
+```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-
+```
 > Tested with Python 3.8+ and PyTorch ≥ 2.0.
 
 ---
@@ -81,6 +57,18 @@ Example folder structure:
       ├── cloud/
       └── label/
 
+---
+
+## 📊 Datasets
+
+| No. | Dataset | Year | Pub. | Number | Image Size | Type | Download |
+|:---:|:--------|:----:|:----:|:-------:|:-----------:|:------:|:----------:|
+| 01 | [**SateHaze1k**](https://ieeexplore.ieee.org/document/9093471) | 2017 | WACV | 400×3 | 512×512 | Synthetic | [🔗 Download](https://www.dropbox.com/scl/fi/wtga5ltw5vby5x7trnp0p/Haze1k.zip?rlkey=70s52w3flhtif020nx250jru3&e=1&dl=0) |
+| 02 | [**RICE (RICE1 & RICE2)**](https://arxiv.org/abs/1901.00600) | 2019 | arXiv | 950 | 512×512 | Synthetic | [🔗 Download](https://github.com/BUPTLdy/RICE_DATASET) |
+
+**Notes:**
+- *SateHaze1k* is divided into **Thin**, **Moderate**, and **Thick** subsets simulating different haze densities.  
+- *RICE1* and *RICE2* include paired cloudy and clear-sky remote sensing images for evaluating dehazing and cloud removal performance.
 ---
 
 ## 🧱 Step 1: Grid-Based Dataset Preparation
