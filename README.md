@@ -75,33 +75,31 @@ Example folder structure:
 
 To generate 128×128 tiles for training and validation:
 
-python tools/grid_crop_pairs.py \
-  --root /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/dataset \
-  --out_root /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/dataset_grid \
+```bash
+python GLADE-Net/tools/grid_crop_pairs.py \
+  --root    dataset \ #path to your dataset train[cloud, label], test[cloud, label]
+  --out_root dataset_grid \
   --tile_w 128 --tile_h 128 --overlap 0
 
+```
 Output tiles will be created under:
 dataset_grid/train/
 dataset_grid/test/
 
 ---
 
-## 🚀 Step 2: Training Phase 1 (UFormer)
+## 🚀 Step 2: Training Phase 1 
 
 Run training from the project root:
-
+```bash
+cd GLADE-Net
 python -m src.train \
-  --train_dir /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/dataset_grid/train \
-  --val_dir   /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/dataset_grid/test \
-  --img_size 128 \
-  --batch_size 1 \
-  --epochs 2500 \
-  --devices 1 \
-  --precision 16 \
-  --accumulate 2 \
-  --lr 2e-4 \
-  --save_ckpt /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/dataset_grid/Grid_RICE_1_new_dataset_final.ckpt
-
+  --train_dir dataset_grid/train \
+  --val_dir   dataset_grid/test \
+  --img_size 128 --batch_size 1 --epochs 2500 --devices 1 \
+  --precision 16 --accumulate 2 --lr 2e-4 \
+  --save_ckpt Phase_1.ckpt
+```
 You can resume training with:
 
 python -m src.train --train_dir ... --val_dir ... --resume /path/to/checkpoint.ckpt
@@ -111,13 +109,14 @@ python -m src.train --train_dir ... --val_dir ... --resume /path/to/checkpoint.c
 ## 🔍 Step 3: Inference Phase 1 (Grid UFormer)
 
 Run inference on cloudy test images using the trained checkpoint:
+```bash
+python GLADE-Net/tools/inference_grid.py \
+  --weights Phase_1.ckpt \
+  --input   dataset/test/cloud \
+  --output  dataset/test/output_phase_1 \
+  --tile 512
 
-python tools/inference_grid.py \
-  --weights /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/Grid/Grid_haze1k_freq_loss_train_with_test_full.ckpt \
-  --input /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/dataset/test/cloud \
-  --output /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/dataset/test/output_phase_1 \
-  --tile 512 \
-  --device cuda
+```
 
 The script will:
 - Load each image, pad to a multiple of the tile size.
@@ -133,7 +132,7 @@ dataset/test/output_phase_1/  # Phase 1 restored results
 
 ---
 
-## 🧮 Step 4: Phase 2 – Perceptual GAN Refinement (Coming Soon)
+## 🧮 Step 4: Training Phase 2 – Perceptual GAN Refinement 
 
 The next phase will use the output from Phase 1 (restored dehazed images) paired with their ground-truth targets to train a perceptual enhancement GAN.  
 This stage focuses on:
@@ -141,23 +140,20 @@ This stage focuses on:
 - Multi-domain learning (RGB + Laplacian).
 - Perceptual and adversarial loss integration.
 
-### Placeholder for Phase 2 Code
+```bash
+python GLADE-Net/Phase_2/code/train.py\
+     -opt GLADE-Net/Phase_2/code/options/train/train_second_phase.json
+```
+---
+## 🔍 Step 5: Inference Phase 2
 
-#############################
-# Phase 2 - Enhancement GAN
-# (To be implemented)
-#############################
-
-Example usage (will be updated later):
-
-python tools/inference_phase2.py \
-  --weights /path/to/phase2_weights.ckpt \
-  --input dataset/test/output_phase_1 \
-  --gt dataset/test/label \
-  --output dataset/test/output_phase_2
+Run inference on cloudy test images using the trained weight:
+```bash
+python GLADE-Net/Phase_2/code/test.py\
+     -opt GLADE-Net/Phase_2/code/options/test/test_second_phase.json 
+```
 
 ---
-
 ## 🧠 Citation
 
 If you use this repository, please cite the paper:
