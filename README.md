@@ -168,6 +168,51 @@ You can open and run it directly on GitHub or in Google Colab.
 
 ---
 
+## 🧠 Model Weights
+
+Pretrained model weights for **GLADE-Net** are available for both phases and all datasets.  
+You can download them from the shared Google Drive folder below.
+
+**🔗 [GLADE-Net Weights (Google Drive)](https://drive.google.com/drive/folders/1kGpW-zYIsljnbQJ5QBkBvT8TVz7qUA2K?usp=sharing)**
+
+### Folder Structure:
+
+| Phase | Folder | Dataset | File Name | Description |
+|:--:|:--|:--|:--|:--|
+| **1** | [`pahse_1`](https://drive.google.com/drive/folders/1Kla6G0DWNynk8hcrrA_RSoQt9SRo9O3_?usp=sharing) | SateHaze1k | `SateHaze1k.ckpt` | Global attention model trained on synthetic haze data. |
+|  |  | RICE-1 | `RICE_1.ckpt` | Phase 1 model trained on RICE1 dataset. |
+|  |  | RICE-2 | `RICE_2.ckpt` | Phase 1 model trained on RICE2 dataset. |
+| **2** | [`phase_2`](https://drive.google.com/drive/folders/1QO-VLsAVufE3w1KSuhQe8oex_GRT1ZWw?usp=sharing) | SateHaze1k | `SateHaze1k.pth` | Laplacian-Guided GAN model for perceptual refinement. |
+|  |  | RICE-1 | `Rice_1.pth` | Phase 2 refinement model trained on RICE1 dataset. |
+|  |  | RICE-2 | `Rice_2.pth` | Phase 2 refinement model trained on RICE2 dataset. |
+
+---
+
+**Notes:**
+- Each `.ckpt` file corresponds to the **Phase 1 (UFormer)** stage for global dehazing.  
+- Each `.pth` file corresponds to the **Phase 2 (GAN Refinement)** stage for perceptual enhancement.  
+- Models can be directly loaded using the provided demo notebook or inference scripts.
+---
+
+## 🧾 Output Results
+
+The final qualitative and quantitative results of **GLADE-Net** are available for each dataset and test condition.  
+You can browse and download them from the shared Google Drive folder below.
+
+**🔗 [GLADE-Net Results (Google Drive)](https://drive.google.com/drive/folders/1yB7ubsnIRDRaKaGJsSxj_-MpOIe6PM8O?usp=sharing)**
+
+### Folder Structure:
+| Folder | Description |
+|:--|:--|
+| **Grid_SPSR_test_thin** | Results on SateHaze1k–Thin (light haze conditions). |
+| **Grid_SPSR_test_Moderate** | Results on SateHaze1k–Moderate (medium haze). |
+| **Grid_SPSR_test_thick** | Results on SateHaze1k–Thick (dense haze). |
+| **RICE_results** | Dehazing results on RICE1 and RICE2 datasets. |
+| **test real images hazing** | Visual qualitative results on real-world hazy aerial images. |
+
+> 🧩 Each subfolder contains restored RGB images from the **Phase 1 (Global Attention)** and **Phase 2 (Laplacian-Guided GAN)** pipelines, organized according to haze intensity and dataset type.
+---
+
 ## 🧠 Citation
 
 If you use this repository, please cite the paper:
