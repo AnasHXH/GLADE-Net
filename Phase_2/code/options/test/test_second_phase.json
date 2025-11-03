@@ -1,0 +1,36 @@
+{
+  //"name": "final_valid_SPSR_after_refusion_3_111"
+  "name": "test_second_phase"
+  , "model": "spsr"
+  , "scale": 1
+  , "gpu_ids": [0] 
+
+  , "datasets": {
+    "test_1": { 
+      "name": "phase_2" 
+      , "mode": "LR"
+      // , "dataroot_HR": "/mnt/4/jzy/dataset/SR_dataset/test_datasets/Set5/Set5_HR" // needed in "LRHR" mode
+      , "dataroot_LR": "/media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/dataset/test/output_phase_1"
+    }
+  }
+  , "path": {
+    "root": "/media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/dataset/test/output_phase_2" // change to your own root path
+
+    //, "resume_state": "../experiments/002_RRDB_ESRGAN_x4_DIV2K/training_state/65000.state"
+
+    , "pretrain_model_G": "/media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/weights/phase_2/SateHaze1k.pth"
+  }
+
+  , "network_G": {
+    "which_model_G": "spsr_net"
+    , "norm_type": null
+    , "mode": "CNA"
+    , "nf": 64
+    , "nb": 23
+    , "in_nc": 3
+    , "out_nc": 3
+
+    , "gc": 32
+    , "group": 1
+  }
+}

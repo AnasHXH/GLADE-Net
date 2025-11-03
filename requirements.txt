@@ -1,0 +1,24 @@
+# ---- Core torch stack (pin matched versions) ----
+torch==2.2.2          # use the CUDA build that matches your driver
+torchvision==0.17.2   # must match torch
+
+# ---- Training framework ----
+pytorch-lightning==2.3.3
+torchmetrics==1.4.0.post0
+
+# ---- Models & utils ----
+timm==0.9.12          # used by Uformer
+einops==0.7.0
+
+# ---- Logging (compatible with pinned protobuf) ----
+wandb==0.12.21
+protobuf==3.20.3      # fixes the "Descriptors cannot be created directly" error
+
+# ---- Data & IO ----
+numpy==1.26.4
+pillow==10.4.0
+opencv-python==4.9.0.80
+
+# ---- Plotting / misc ----
+matplotlib==3.7.5
+tqdm==4.66.4

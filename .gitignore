@@ -1,0 +1,16 @@
+gitignore
+# Python
+__pycache__/
+*.py[cod]
+*.ipynb_checkpoints
+.venv/
+.env
+
+# Lightning & logs
+lightning_logs/
+*.ckpt
+wandb/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,108 @@
+25-11-03 14:34:13.704 - INFO:   name: Second_phase
+  use_tb_logger: True
+  model: spsr
+  scale: 1
+  gpu_ids: [0]
+  datasets:[
+    train:[
+      name: DIV2K
+      mode: LRHR
+      dataroot_HR: /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/dataset/train/label
+      dataroot_LR: /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/dataset/train/output_phase_1
+      subset_file: None
+      use_shuffle: True
+      n_workers: 64
+      batch_size: 1
+      HR_size: 128
+      use_flip: True
+      use_rot: True
+      phase: train
+      scale: 1
+      data_type: img
+    ]
+    val:[
+      name: Set14
+      mode: LRHR
+      dataroot_HR: /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/dataset/test/label
+      dataroot_LR: /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/dataset/test/output_phase_1
+      phase: val
+      scale: 1
+      data_type: img
+    ]
+  ]
+  path:[
+    root: /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/GLADE-Net/Phase_2
+    pretrain_model_G: /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/experiments/SPSR_After_grid_uformer/models/94000_G.pth
+    experiments_root: /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/GLADE-Net/Phase_2/experiments/Second_phase
+    models: /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/GLADE-Net/Phase_2/experiments/Second_phase/models
+    training_state: /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/GLADE-Net/Phase_2/experiments/Second_phase/training_state
+    log: /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/GLADE-Net/Phase_2/experiments/Second_phase
+    val_images: /media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/GLADE-Net/Phase_2/experiments/Second_phase/val_images
+  ]
+  network_G:[
+    which_model_G: spsr_net
+    norm_type: None
+    mode: CNA
+    nf: 64
+    nb: 23
+    in_nc: 3
+    out_nc: 3
+    gc: 32
+    group: 1
+    scale: 1
+  ]
+  network_D:[
+    which_model_D: discriminator_vgg_128
+    norm_type: batch
+    act_type: leakyrelu
+    mode: CNA
+    nf: 64
+    in_nc: 3
+  ]
+  train:[
+    lr_G: 0.0001
+    lr_G_grad: 0.0001
+    weight_decay_G: 0
+    weight_decay_G_grad: 0
+    beta1_G: 0.9
+    beta1_G_grad: 0.9
+    lr_D: 0.0001
+    weight_decay_D: 0
+    beta1_D: 0.9
+    lr_scheme: MultiStepLR
+    lr_steps: [50000, 100000, 200000, 300000]
+    lr_gamma: 0.5
+    pixel_criterion: l1
+    pixel_weight: 0.01
+    feature_criterion: l1
+    feature_weight: 1
+    gan_type: vanilla
+    gan_weight: 0.005
+    gradient_pixel_weight: 0.01
+    gradient_gan_weight: 0.005
+    pixel_branch_criterion: l1
+    pixel_branch_weight: 0.5
+    Branch_pretrain: 1
+    Branch_init_iters: 1000
+    manual_seed: 9
+    niter: 50000
+    val_freq: 2000
+  ]
+  logger:[
+    print_freq: 200
+    save_checkpoint_freq: 2000
+  ]
+  is_train: True
+
+25-11-03 14:34:13.817 - INFO: Random seed: 9
+25-11-03 14:34:13.826 - INFO: Dataset [LRHRDataset - DIV2K] is created.
+25-11-03 14:34:13.826 - INFO: Number of train images: 45, iters: 45
+25-11-03 14:34:13.826 - INFO: Total epochs needed: 1112 for iters 50,000
+25-11-03 14:34:13.827 - INFO: Dataset [LRHRDataset - Set14] is created.
+25-11-03 14:34:13.827 - INFO: Number of val images in [Set14]: 45
+25-11-03 14:34:14.055 - INFO: Initialization method [kaiming]
+25-11-03 14:34:15.705 - INFO: Initialization method [kaiming]
+25-11-03 14:34:15.847 - INFO: Initialization method [kaiming]
+25-11-03 14:34:15.923 - INFO: Loading pretrained model for G [/media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/experiments/SPSR_After_grid_uformer/models/94000_G.pth] ...
+25-11-03 14:34:17.095 - INFO: Model [SPSRModel] is created.
+25-11-03 14:34:17.095 - INFO: Start training from epoch: 0, iter: 0

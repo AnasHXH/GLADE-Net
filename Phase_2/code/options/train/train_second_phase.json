@@ -1,0 +1,93 @@
+{
+  "name": "Second_phase"   
+  , "use_tb_logger": true
+  , "model":"spsr"
+  , "scale": 1
+  , "gpu_ids": [0]
+ 
+  , "datasets": {
+    "train": {
+      "name": "DIV2K"
+      , "mode": "LRHR"
+      , "dataroot_HR": "/media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/dataset/train/label"
+      , "dataroot_LR": "/media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/dataset/train/output_phase_1"
+      , "subset_file": null
+      , "use_shuffle": true
+      , "n_workers": 64
+      , "batch_size": 1
+      , "HR_size": 128
+      , "use_flip": true
+      , "use_rot": true
+    }
+    , "val": {
+      "name": "Set14"
+      , "mode": "LRHR"
+      , "dataroot_HR": "/media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/dataset/test/label"
+      , "dataroot_LR": "/media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/dataset/test/output_phase_1"
+    }
+  }
+
+  , "path": {
+    "root": "/media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/GLADE-Net/Phase_2" //modify to you own root path
+    //, "resume_state": "/data/Image_restoration/SDM/experiments/SPSR/training_state/15000.state"
+    , "pretrain_model_G": "/media/anas/Data/Anas_Work_2/Grid_SPSR_paper/Grid_spsr_code/weights/phase_2/SateHaze1k.pth"
+  }
+
+  , "network_G": {
+    "which_model_G": "spsr_net" 
+    , "norm_type": null
+    , "mode": "CNA"
+    , "nf": 64
+    , "nb": 23
+    , "in_nc": 3
+    , "out_nc": 3
+    , "gc": 32
+    , "group": 1
+  }
+
+  , "network_D": {
+    "which_model_D": "discriminator_vgg_128"
+    , "norm_type": "batch"
+    , "act_type": "leakyrelu"
+    , "mode": "CNA"
+    , "nf": 64
+    , "in_nc": 3
+  }
+
+  , "train": {
+    "lr_G": 1e-4
+    , "lr_G_grad": 1e-4
+    , "weight_decay_G": 0
+    , "weight_decay_G_grad": 0
+    , "beta1_G": 0.9
+    , "beta1_G_grad": 0.9
+    , "lr_D": 1e-4
+    , "weight_decay_D": 0
+    , "beta1_D": 0.9
+    , "lr_scheme": "MultiStepLR"
+    , "lr_steps": [50000, 100000, 200000, 300000]
+    , "lr_gamma": 0.5
+
+    , "pixel_criterion": "l1"
+    , "pixel_weight": 1e-2
+    , "feature_criterion": "l1"
+    , "feature_weight": 1
+    , "gan_type": "vanilla"
+    , "gan_weight": 5e-3
+    , "gradient_pixel_weight": 1e-2
+    , "gradient_gan_weight": 5e-3
+    , "pixel_branch_criterion": "l1"
+    , "pixel_branch_weight": 5e-1
+    , "Branch_pretrain" : 1
+    , "Branch_init_iters" : 1000 //5000
+
+    , "manual_seed": 9
+    , "niter": 50000
+    , "val_freq": 2000
+  }
+
+  , "logger": {
+    "print_freq": 200
+    , "save_checkpoint_freq": 2000
+  }
+}
