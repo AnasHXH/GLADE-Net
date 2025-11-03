@@ -152,7 +152,21 @@ Run inference on cloudy test images using the trained weight:
 python GLADE-Net/Phase_2/code/test.py\
      -opt GLADE-Net/Phase_2/code/options/test/test_second_phase.json 
 ```
+---
+### 🚀 Quick Demo – Try GLADE-Net in One Notebook
 
+If you want to quickly test **GLADE-Net (Phase 1 + Phase 2)** without setting up the entire training pipeline, we provide an interactive demo notebook.  
+You can open and run it directly on GitHub or in Google Colab.
+
+**Demo Notebook:**  
+[![train_inference_Phase_1_and_2_demo_tutorial.ipynb](https://img.shields.io/badge/Open%20Demo%20Notebook-Click%20Here-blue?style=for-the-badge)](https://github.com/AnasHXH/GLADE-Net/blob/main/notebooks/train_inference_Phase_1_and_2_demo_tutorial.ipynb)
+
+📘 This notebook demonstrates:
+- Loading pretrained Phase 1 and Phase 2 models  
+- Running inference on sample remote-sensing images  
+- Visualizing haze removal and perceptual enhancement results  
+
+---
 ---
 ## 🧠 Citation
 
