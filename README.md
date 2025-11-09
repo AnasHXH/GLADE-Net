@@ -182,7 +182,7 @@ You can download them from the shared Google Drive folder below.
 | **1** | [`pahse_1`](https://drive.google.com/drive/folders/1Kla6G0DWNynk8hcrrA_RSoQt9SRo9O3_?usp=sharing) | SateHaze1k | `SateHaze1k.ckpt` | Global attention model trained on synthetic haze data. |
 |  |  | RICE-1 | `RICE_1.ckpt` | Phase 1 model trained on RICE1 dataset. |
 |  |  | RICE-2 | `RICE_2.ckpt` | Phase 1 model trained on RICE2 dataset. |
-| **2** | [`phase_2`](https://drive.google.com/drive/folders/1QO-VLsAVufE3w1KSuhQe8oex_GRT1ZWw?usp=sharing) | SateHaze1k | `SateHaze1k.pth` | Laplacian-Guided GAN model for perceptual refinement. |
+| **2** | [`phase_2`](https://drive.google.com/drive/folders/1Q0-VLsAVufE3w1KSuhQe8oex_GRT1ZWw?usp=sharing) | SateHaze1k | `SateHaze1k.pth` | Laplacian-Guided GAN model for perceptual refinement. |
 |  |  | RICE-1 | `Rice_1.pth` | Phase 2 refinement model trained on RICE1 dataset. |
 |  |  | RICE-2 | `Rice_2.pth` | Phase 2 refinement model trained on RICE2 dataset. |
 
